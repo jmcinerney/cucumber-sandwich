@@ -13,7 +13,9 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 
 public class CucumberReportMonitor {
@@ -80,7 +82,11 @@ public class CucumberReportMonitor {
         scanner.setIncludes(new String[] {"**/*.json"});
         scanner.setBasedir(targetDirectory);
         scanner.scan();
-        return scanner.getIncludedFiles();
+        
+        String[] listOfFiles = scanner.getIncludedFiles();
+        Arrays.sort(listOfFiles);
+
+        return listOfFiles;
     }
 
     private static void generateReport(File reportFolder, File outputFolder) throws Exception {
